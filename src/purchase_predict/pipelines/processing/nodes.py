@@ -2,11 +2,12 @@ import pandas as pd
 
 from typing import Dict, Any
 
+from pandas import DataFrame
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 
 
-def encode_features(dataset: pd.DataFrame) -> pd.DataFrame:
+def encode_features(dataset: pd.DataFrame) -> dict[str, DataFrame]:
     """
     Encode features of data file.
     """
@@ -21,7 +22,11 @@ def encode_features(dataset: pd.DataFrame) -> pd.DataFrame:
         encoders.append((label, encoder))
 
     features["weekday"] = features["weekday"].astype(int)
-    return dict(features=features, transform_pipeline=encoders)
+    columns_to_convert = ["brand", "category", "sub_category"]
+
+    for col in columns_to_convert:
+        features[col] = pd.to_numeric(features[col], errors="coerce")
+    return dict(features=features)
 
 
 def split_dataset(dataset: pd.DataFrame, test_ratio: float) -> Dict[str, Any]:

@@ -18,8 +18,10 @@ def create_pipeline(**kwargs) -> Pipeline:
                     "X_test",
                     "y_test",
                     "params:automl_max_evals",
+                    "params:mlflow_enabled",
+                    "params:mlflow_experiment_id",
                 ],
-                outputs=dict(model="model"),
+                outputs=dict(model="model", mlflow_run_id="mlflow_run_id"),
                 name="auto_ml",
             )
         ]
