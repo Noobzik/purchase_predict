@@ -175,7 +175,7 @@ def auto_ml(
         save_pr_curve(X_test, y_test, best_model["model"])
         mlflow.log_metrics(model_metrics)
         mlflow.log_params(best_model["params"])
-        mlflow.log_artifact("data/08_reporting/pr_curve.png", artifact_path="plots")
+        mlflow.log_artifact("data/08_reporting", artifact_path="plots")
         mlflow.sklearn.log_model(best_model["model"], "model", signature=signature)
         mlflow.end_run()
 
