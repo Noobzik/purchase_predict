@@ -6,6 +6,7 @@ steps:
   - -c
   - 'chmod a+x install.sh && ./install.sh && pytest'
 
+logs_bucket: gs://purchase_predict
+
 options:
   logging: CLOUD_LOGGING_ONLY
-  logs_bucket: gs://purchase_predict
