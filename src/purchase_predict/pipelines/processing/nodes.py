@@ -26,7 +26,7 @@ def encode_features(dataset: pd.DataFrame) -> dict[str, DataFrame]:
 
     for col in columns_to_convert:
         features[col] = pd.to_numeric(features[col], errors="coerce")
-    return dict(features=features)
+    return dict(features=features, transform_pipeline=encoders)
 
 
 def split_dataset(dataset: pd.DataFrame, test_ratio: float) -> Dict[str, Any]:

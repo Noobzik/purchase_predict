@@ -28,3 +28,7 @@ model:
 
 mlflow_run_id:
   type: MemoryDataset
+
+transform_pipeline:
+  type: pickle.PickleDataset
+  filepath: data/04_feature/transform_pipeline.pkl

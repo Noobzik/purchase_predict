@@ -27,3 +27,5 @@ def stage_model(registry_name: str, version: int):
     client.transition_model_version_stage(
         name=registry_name, version=str(version), stage=env[0].upper() + env[1:]
     )
+    # latest_mv = client.get_latest_versions(registry_name, stages=[env.capitalize()])[0]
+    # client.set_registered_model_alias(name=registry_name, alias=env.upper(), version=latest_mv.version)

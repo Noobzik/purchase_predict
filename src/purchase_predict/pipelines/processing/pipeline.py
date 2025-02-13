@@ -8,7 +8,9 @@ def create_pipeline(**kwargs):
             node(
                 func=encode_features,
                 inputs="primary",
-                outputs=dict(features="dataset"),
+                outputs=dict(
+                    features="dataset", transform_pipeline="transform_pipeline"
+                ),
                 name="encode_features",
             ),
             node(

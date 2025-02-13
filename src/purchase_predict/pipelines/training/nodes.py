@@ -136,6 +136,7 @@ def auto_ml(
     run_id = ""
     if log_to_mlflow:
         mlflow.set_tracking_uri(os.getenv("MLFLOW_SERVER"))
+        mlflow.set_experiment(str(experiment_id))
         run = mlflow.start_run(experiment_id=str(experiment_id))
         run_id = run.info.run_id
 
@@ -176,6 +177,7 @@ def auto_ml(
         mlflow.log_metrics(model_metrics)
         mlflow.log_params(best_model["params"])
         mlflow.log_artifact("data/08_reporting", artifact_path="plots")
+        mlflow.log_artifact("data/04_feature/transform_pipeline.pkl")
         mlflow.sklearn.log_model(best_model["model"], "model", signature=signature)
         mlflow.end_run()
 
