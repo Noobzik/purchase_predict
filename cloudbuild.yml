@@ -1,5 +1,5 @@
 steps:
-- name: "docker.io/library/python:3.12"
+- name: "ghcr.io/astral-sh/uv:python3.12-alpine"
   id: CI
   entrypoint: /bin/sh
   args:
