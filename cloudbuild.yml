@@ -8,6 +8,6 @@ steps:
     chmod a+x install.sh && 
     ./install.sh &&
     source .venv/bin/activate && 
-    pytest
+    pytest .
 
 logs_bucket: gs://purchase_predict
