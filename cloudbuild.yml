@@ -1,13 +1,28 @@
 steps:
-- name: "ghcr.io/astral-sh/uv:python3.12-bookworm"
+- name: "noobzik/uv-gcp-cloud-build"
   id: CI
   entrypoint: /bin/bash
+  env:
+    - PROJECT_ID=$PROJECT_ID
+    - SERVICE_ACCOUNT=$SERVICE_ACCOUNT
   args:
   - -c
   - |
+    echo "$SERVICE_ACCOUNT" | base64 -d > service_account.json
+    gcloud auth activate-service-account --key-file=service_account.json
+    gcloud config set project "$PROJECT_ID"
     chmod a+x install.sh && 
     ./install.sh &&
     source .venv/bin/activate &&
     pytest .
+#- name: "noobzik/uv-gcp-cloud-build"
+#  id: CD
+#  entrypoint: /bin/bash
+#  args:
+#  - -c
+#  - 'chmod a+x install.sh && ./install.sh && kedro run --pipeline global'
+#  env:
+#  - 'ENV=$BRANCH_NAME'
+#  - 'MLFLOW_SERVER=$_MLFLOW_SERVER'
 
 logs_bucket: gs://purchase_predict
