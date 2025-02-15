@@ -2,12 +2,17 @@ steps:
 - name: "noobzik/uv-gcp-cloud-build"
   id: CI
   entrypoint: /bin/bash
+  secretEnv: ['SERVICE_ACCOUNT']
   env:
     - PROJECT_ID=$PROJECT_ID
-    - SERVICE_ACCOUNT=$_SERVICE_ACCOUNT
   args:
   - -c
   - |
+    echo "$$SERVICE_ACCOUNT" > service_account.json
+    if ! gcloud auth activate-service-account --key-file=service_account.json; then
+      echo "ERROR: gcloud authenfication failed!"
+      exit 1
+    fi
     gcloud config set project "$PROJECT_ID"
     chmod a+x install.sh && 
     ./install.sh &&
@@ -24,3 +29,7 @@ steps:
 #  - 'MLFLOW_SERVER=$_MLFLOW_SERVER'
 
 logs_bucket: gs://purchase_predict
+availableSecrets:
+  secretManager:
+  - versionName: projects/$PROJECT_ID/secrets/cloud-build/versions/1
+    env: SERVICE_ACCOUNT
