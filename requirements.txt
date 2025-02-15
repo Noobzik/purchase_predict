@@ -17,3 +17,4 @@ pre_commit==4.1.0
 seaborn==0.13.2
 pytest
 pytest-cov
+gcsfs
