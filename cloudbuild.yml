@@ -1,7 +1,7 @@
 steps:
-- name: "ghcr.io/astral-sh/uv:python3.13-bookworm"
+- name: "ghcr.io/astral-sh/uv:python3.12-bookworm"
   id: CI
-  entrypoint: /bin/sh
+  entrypoint: /bin/bash
   args:
   - -c
   - |
