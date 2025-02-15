@@ -4,6 +4,10 @@ steps:
   entrypoint: /bin/sh
   args:
   - -c
-  - 'chmod a+x install.sh && ./install.sh && pytest'
+  - |
+    chmod a+x install.sh && 
+    ./install.sh &&
+    source .venv/bin/activate && 
+    pytest
 
 logs_bucket: gs://purchase_predict
