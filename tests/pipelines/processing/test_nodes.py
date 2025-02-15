@@ -5,7 +5,7 @@ from src.purchase_predict.pipelines.processing.nodes import (
     split_dataset,
 )
 
-BALANCE_THRESHOLD = 0.1
+BALANCE_THRESHOLD = 0.08
 MIN_SAMPLES = 5000
 
 

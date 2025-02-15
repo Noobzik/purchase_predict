@@ -14,6 +14,9 @@ def encode_features(dataset: pd.DataFrame) -> dict[str, DataFrame]:
     features = dataset.drop(["user_id", "user_session"], axis=1).copy()
 
     encoders = []
+    # print("Initial purchase distribution:")
+    # print(features["purchased"].value_counts(normalize=True))
+
     for label in ["category", "sub_category", "brand"]:
         features[label] = features[label].astype(str)
         features.loc[features[label] == "nan", label] = "unknown"
