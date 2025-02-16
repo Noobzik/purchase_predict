@@ -9,7 +9,7 @@ def project_id():
 
 @pytest.fixture(scope="module")
 def primary_folder():
-    return "purchase_predict/data-test.csv"
+    return "purchase_predict/primary.csv"
 
 
 @pytest.fixture(scope="module")
