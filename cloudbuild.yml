@@ -21,6 +21,7 @@ steps:
 - name: "noobzik/uv-gcp-cloud-build"
   id: CD
   entrypoint: /bin/bash
+  secretEnv: ['SERVICE_ACCOUNT']
   args:
   - -c
   - |
