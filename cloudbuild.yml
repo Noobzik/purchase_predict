@@ -35,10 +35,23 @@ steps:
   env:
   - 'ENV=$BRANCH_NAME'
   - 'MLFLOW_SERVER=$_MLFLOW_SERVER'
-
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  id: API Deploy
+  secretEnv: ['GITHUB_TOKEN']
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+      git clone --branch $BRANCH_NAME https://$$GITHUB_TOKEN@github.com/YOUR_GITHUB_ORG/purchase_predict_api.git /tmp/purchase_predict_api
+      cd /tmp/purchase_predict_api
+      gcloud builds submit \
+        --config /tmp/purchase_predict_api/cloudbuild.yaml /tmp/purchase_predict_api \
+        --substitutions=SHORT_SHA=$SHORT_SHA
+timeout: 1200s
 
 logs_bucket: gs://purchase_predict
 availableSecrets:
   secretManager:
   - versionName: projects/$PROJECT_ID/secrets/cloud-build/versions/1
     env: SERVICE_ACCOUNT
+  - GITHUB_TOKEN: projects/$PROJECT_ID/secrets/GITHUB_TOKEN/versions/latest
