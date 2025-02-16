@@ -35,6 +35,8 @@ steps:
   - 'ENV=$BRANCH_NAME'
   - 'MLFLOW_SERVER=$_MLFLOW_SERVER'
 
+options:
+  machineType: E2_HIGHCPU_8
 logs_bucket: gs://purchase_predict
 availableSecrets:
   secretManager:
